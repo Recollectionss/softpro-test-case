@@ -1,5 +1,7 @@
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { HttpError } from '../../shared/error/http-error';
+import { HttpCode } from '../../shared/enum/http-code.enum';
 
 export class UserService {
   constructor(private readonly userRepository: typeof User) {}
@@ -15,7 +17,10 @@ export class UserService {
     });
 
     if (dataValues) {
-      throw new Error(`409 : Employee with this email already exists`);
+      throw new HttpError(
+        HttpCode.CONFLICT,
+        `User with this email already exists`,
+      );
     }
   }
 
@@ -25,7 +30,7 @@ export class UserService {
     });
 
     if (!dataValues) {
-      throw new Error('500: User not found');
+      throw new HttpError(HttpCode.NOT_FOUND, 'User not found');
     }
     return dataValues;
   }
@@ -34,7 +39,7 @@ export class UserService {
     const dataValues = await this.userRepository.findByPk(id);
 
     if (!dataValues) {
-      throw new Error('404: User not found');
+      throw new HttpError(HttpCode.INTERNAL_SERVER_ERROR, 'User not found');
     }
     return dataValues;
   }
