@@ -1,9 +1,11 @@
 import { Controller } from '../../core/controller.abstract';
+import { SignUpDto } from './dto/sign-up.dto';
+import { Request, Response } from 'express';
 
 export class AuthController extends Controller {
   async initRoutes(): Promise<void> {
-    this.router.post('/sign-in', this.signIn.bind(this));
-    this.router.post('/sign-up', this.signUp.bind(this));
+    this.router.post('/sign-in', ...this.validate(SignUpDto, this.signIn));
+    this.router.post('/sign-up', ...this.validate(SignUpDto, this.signUp));
     this.router.post('/logout', this.logout.bind(this));
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,4 +1,5 @@
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
+import { validateBodyMiddleware } from '../middlewares/validate-body.middleware';
 
 export abstract class Controller {
   protected router: Router;
@@ -11,5 +12,12 @@ export abstract class Controller {
 
   public getRouter() {
     return this.router;
+  }
+
+  protected validate<T>(
+    dto: new () => T,
+    handler: RequestHandler,
+  ): RequestHandler[] {
+    return [validateBodyMiddleware(dto), handler.bind(this)];
   }
 }
