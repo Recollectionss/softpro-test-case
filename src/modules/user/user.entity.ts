@@ -1,12 +1,8 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { UserType } from '../../shared/enum/user-type.enum';
 
-export enum UserType {
-  PROVIDER = 'provider',
-  CLIENT = 'client',
-}
-
-@Table({ tableName: 'user' })
+@Table({ tableName: 'user', timestamps: false })
 export class User extends Model<User> {
   @Column({
     type: DataType.UUID,
@@ -32,5 +28,5 @@ export class User extends Model<User> {
     allowNull: false,
     defaultValue: UserType.CLIENT,
   })
-  type!: string;
+  type!: UserType;
 }
