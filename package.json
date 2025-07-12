@@ -7,7 +7,14 @@
     "build": "tsc",
     "dev": "ts-node-dev --respawn src/index.ts",
     "start": "ts-node src/index.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --ext .ts",
+    "migration:create": "sequelize migration:create --name",
+    "migration:up": "sequelize-cli db:migrate",
+    "migration:down": "sequelize-cli db:migrate:undo",
+    "migration:reset": "sequelize-cli db:migrate:undo:all",
+    "seed:create": "sequelize-cli seed:generate --name",
+    "seed:up": "npx sequelize-cli db:seed:all",
+    "seed:reset": "npx sequelize-cli db:seed:undo:all"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -22,6 +29,7 @@
     "eslint-plugin-prettier": "^5.5.1",
     "express": "^5.1.0",
     "prettier": "^3.6.1",
+    "sequelize-cli": "^6.6.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
