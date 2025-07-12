@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import * as process from 'node:process';
 
 dotenv.config();
 
@@ -7,6 +8,7 @@ export const Config = {
   port: Number(process.env.PORT),
   jwt: {
     iss: String(process.env.JWT_ISS),
+    secret: String(process.env.JWT_SECRET),
     tll: {
       accessToken: Number(process.env.JWT_ACCESS_TOKEN_TTL),
       refreshToken: Number(process.env.JWT_REFRESH_TOKEN_TTL),
