@@ -17,7 +17,7 @@ export class ServicesController extends Controller {
       ...this.validate(CreateServiceDto, this.createOne),
     );
     this.router.get(
-      '/',
+      '/:id',
       authMiddleware([UserType.PROVIDER]),
       this.findOne.bind(this),
     );
@@ -26,6 +26,7 @@ export class ServicesController extends Controller {
   async createOne(req: Request, res: Response) {
     return this.servicesService.createOne(req, res);
   }
+
   async findOne(req: Request, res: Response) {
     return this.servicesService.findOne(req, res);
   }
