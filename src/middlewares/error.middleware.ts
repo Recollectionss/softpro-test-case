@@ -9,7 +9,7 @@ export const errorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) => {
-  res.status(err.statusCode).json({
+  res.status(err.statusCode | 500).json({
     error: {
       message: err.message,
       ...(process.env.NODE_ENV === 'development' ? { stack: err.stack } : {}),

@@ -2,7 +2,7 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import { UserType } from '../../shared/enum/user-type.enum';
 
-@Table({ tableName: 'user', timestamps: false })
+@Table({ tableName: 'users', timestamps: false })
 export class User extends Model<User> {
   @Column({
     type: DataType.UUID,

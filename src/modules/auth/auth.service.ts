@@ -34,7 +34,7 @@ export class AuthService {
 
   async signIn(req: Request<object, object, SignInDto>, res: Response) {
     const data: SignInDto = req.body;
-    const userData = await this.userService.createOne(data);
+    const userData = await this.userService.findByEmail(data.email);
 
     await this.validatePassword(data.password, userData.password);
     const tokens: JwtTokens = this.jwtService.signTokens({
@@ -60,6 +60,11 @@ export class AuthService {
         throw new HttpError();
       }
     }
+  }
+
+  async logout(req: Request, res: Response) {
+    res.clearCookie('token');
+    return res.status(200).json({});
   }
 
   private async validatePassword(password: string, hashPassword: string) {

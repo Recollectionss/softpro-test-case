@@ -3,12 +3,12 @@ import { validateBodyMiddleware } from '../middlewares/validate-body.middleware'
 
 export abstract class Controller {
   protected router: Router;
-  constructor() {
+  protected constructor() {
     this.router = Router();
     this.initRoutes();
   }
 
-  abstract initRoutes(): Promise<void>;
+  abstract initRoutes(): void;
 
   public getRouter() {
     return this.router;
