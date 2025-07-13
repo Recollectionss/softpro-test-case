@@ -1,6 +1,7 @@
 import { Config } from '../../config/config';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/user.entity';
+import { Services } from '../services/services.entity';
 
 export default async () => {
   const sequelize = new Sequelize({
@@ -13,7 +14,7 @@ export default async () => {
     password: Config.postgres.password,
   });
 
-  sequelize.addModels([User]);
+  sequelize.addModels([User, Services]);
 
   if (Config.node_env === 'testing') {
     await sequelize.sync({ force: true });
