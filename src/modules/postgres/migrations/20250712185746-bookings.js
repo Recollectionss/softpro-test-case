@@ -15,6 +15,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      accepted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
       serviceId: {
         type: Sequelize.UUID,
         allowNull: false,

@@ -22,7 +22,14 @@ export class Booking extends Model<Booking> {
     type: DataType.DATE,
     allowNull: false,
   })
-  startTime!: string;
+  startTime!: Date;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  })
+  accepted!: boolean;
 
   @ForeignKey(() => User)
   @Column({
