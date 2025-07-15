@@ -26,6 +26,7 @@ export class AuthService {
     const tokens: JwtTokens = this.jwtService.signTokens({
       sub: userData.id,
       userType: userData.type,
+      email: userData.email,
     });
 
     this.setTokenInCookie(res, tokens.refreshToken);
@@ -40,6 +41,7 @@ export class AuthService {
     const tokens: JwtTokens = this.jwtService.signTokens({
       sub: userData.id,
       userType: userData.type,
+      email: userData.email,
     });
 
     this.setTokenInCookie(res, tokens.refreshToken);
@@ -51,8 +53,11 @@ export class AuthService {
     let jwtData: UserJwtDataDto;
     try {
       jwtData = this.jwtService.decode(token);
-      await this.userService.findById(jwtData.sub);
-      const tokens = this.jwtService.signTokens(jwtData);
+      const userData = await this.userService.findById(jwtData.sub);
+      const tokens = this.jwtService.signTokens({
+        ...jwtData,
+        email: userData.email,
+      });
       this.setTokenInCookie(res, tokens.refreshToken);
       return res.status(200).json({ accessToken: tokens.accessToken });
     } catch (err) {
