@@ -1,11 +1,12 @@
 import { notificationService } from '../notification.service';
 import { Queue, Worker } from 'bullmq';
 import { BookingMailType } from '../../../shared/enum/booking-mail.enum';
+import { Config } from '../../../config/config';
 
 export const queue = new Queue('reminderQueue', {
   connection: {
-    host: 'redis',
-    port: 6379,
+    host: Config.redis.host,
+    port: Config.redis.port,
   },
 });
 
@@ -24,8 +25,8 @@ export const queueWorker = new Worker(
   },
   {
     connection: {
-      host: 'redis',
-      port: 6379,
+      host: Config.redis.host,
+      port: Config.redis.port,
     },
   },
 );
