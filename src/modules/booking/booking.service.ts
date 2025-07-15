@@ -1,7 +1,6 @@
 import { Booking } from './booking.entity';
 import { Request, Response } from 'express';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { UserJwtDataDto } from '../../shared/dto/user-jwt-data.dto';
 import { HttpCode } from '../../shared/enum/http-code.enum';
 import { servicesService, ServicesService } from '../services/services.service';
 import { HttpError } from '../../error/http-error';
