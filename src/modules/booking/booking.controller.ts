@@ -16,7 +16,11 @@ export class BookingController extends Controller {
       ...this.validate(CreateBookingDto, this.create),
     );
     this.router.get('/:id', this.findOne.bind(this));
-    this.router.get('/', this.findAll.bind(this));
+    this.router.get(
+      '/',
+      authMiddleware([UserType.PROVIDER]),
+      this.findAll.bind(this),
+    );
     this.router.post(
       '/accept/:id',
       authMiddleware([UserType.PROVIDER]),

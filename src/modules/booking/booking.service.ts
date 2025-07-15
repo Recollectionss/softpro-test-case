@@ -31,7 +31,11 @@ export class BookingService {
     const providerData = await this.userService.findById(serviceData.userId);
 
     await this.checkCreate(data);
-    await this.bookingRepository.create({ ...data, userId: userData.sub });
+    await this.bookingRepository.create({
+      ...data,
+      userId: userData.sub,
+      startTime: new Date(data.startTime),
+    });
 
     this.notificationService.send({
       clientMail: userData.email,
@@ -50,11 +54,11 @@ export class BookingService {
       throw new HttpError(HttpCode.NOT_FOUND, 'Booking not found');
     }
 
-    return res.status(HttpCode.OK).json({ dataValues });
+    return res.status(HttpCode.OK).json(dataValues);
   }
 
   async findAll(req: Request, res: Response): Promise<Response> {
-    const userData: UserJwtDataDto = (req as any).user;
+    const userData: AccessJwtDataDto = (req as any).user;
     const data = await this.bookingRepository.findAll({
       include: [
         {
@@ -63,7 +67,7 @@ export class BookingService {
         },
       ],
     });
-    return res.status(HttpCode.OK).json({ data });
+    return res.status(HttpCode.OK).json(data);
   }
 
   async acceptBooking(req: Request, res: Response): Promise<Response> {
@@ -80,8 +84,8 @@ export class BookingService {
 
   private async checkCreate(data: CreateBookingDto): Promise<void | HttpError> {
     const serviceData = await this.servicesService.findById(data.serviceId);
-    const endTime: Date = new Date(data.startTime.getTime());
-    endTime.setMinutes(data.startTime.getMinutes() + serviceData.duration);
+    const endTime: Date = new Date(data.startTime);
+    endTime.setMinutes(endTime.getMinutes() + serviceData.duration);
     const bookings = await Booking.findAll({
       where: {
         serviceId: serviceData.id,
@@ -95,8 +99,8 @@ export class BookingService {
       const existingStart = new Date(booking.startTime);
       const existingEnd = new Date(existingStart.getTime());
       existingEnd.setMinutes(existingEnd.getMinutes() + serviceData.duration);
-
-      const overlaps = existingStart < endTime && existingEnd > data.startTime;
+      const overlaps =
+        existingStart < endTime && existingEnd > new Date(data.startTime);
 
       if (overlaps) {
         throw new HttpError(HttpCode.CONFLICT, 'Time slot already taken');
