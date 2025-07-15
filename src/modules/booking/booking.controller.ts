@@ -1,9 +1,9 @@
 import { Controller } from '../../core/controller.abstract';
-import { authMiddleware } from '../../middlewares/role.middleware';
 import { UserType } from '../../shared/enum/user-type.enum';
 import { bookingService, BookingService } from './booking.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { Request, Response } from 'express';
+import { authMiddleware } from '../../middlewares/auth.middleware';
 
 export class BookingController extends Controller {
   constructor(private readonly bookingService: BookingService) {
