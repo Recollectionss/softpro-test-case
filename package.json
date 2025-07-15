@@ -42,6 +42,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "cookie-parser": "^1.4.7",
+    "express-rate-limit": "^7.5.1",
     "ioredis": "^5.6.1",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
@@ -50,6 +51,8 @@
     "redis": "^5.6.0",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ts-node-dev": "^2.0.0"
   }
 }
