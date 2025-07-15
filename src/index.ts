@@ -10,4 +10,5 @@ async function bootstrap() {
     console.log(`Server running on port ${Config.port}`);
   });
 }
+console.log(new Date().getMinutes());
 bootstrap();

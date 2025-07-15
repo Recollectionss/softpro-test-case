@@ -42,6 +42,18 @@ export class BookingService {
       providerMail: providerData.email,
       mailType: BookingMailType.CREATED,
     });
+
+    const start = new Date(data.startTime);
+    const delay = start.getTime() - Date.now() - 60 * 60 * 1000;
+
+    if (delay > 0) {
+      await this.notificationService.sendLater({
+        serviceName: serviceData.name,
+        mailType: BookingMailType.REMINDER,
+        clientMail: userData.email,
+        delay,
+      });
+    }
     return res.status(HttpCode.CREATED).json({});
   }
 

@@ -1,6 +1,7 @@
 import { MailDto } from '../../shared/dto/mail.dto';
 import { BookingMailType } from '../../shared/enum/booking-mail.enum';
 import { FakeMailDto } from '../../shared/dto/fake-mail.dto';
+import { HttpError } from '../../error/http-error';
 
 export class MailFactory {
   buildMail(data: MailDto): FakeMailDto {
@@ -25,6 +26,13 @@ export class MailFactory {
         mail.subject = 'Canceling booking';
         mail.text = `Your booking on service ${data.serviceName}, has been cancelled.`;
         return mail;
+      case BookingMailType.REMINDER:
+        mail.to = data.clientMail;
+        mail.subject = 'Upcoming booking reminder';
+        mail.text = `Reminder: your booking for "${data.serviceName}" starts in one hour.`;
+        return mail;
+      default:
+        throw new HttpError();
     }
   }
 }
