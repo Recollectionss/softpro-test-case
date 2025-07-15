@@ -48,8 +48,8 @@ src/
 ## Project setup
 
 ```bash
-git clone https://github.com/your-username/booking-api.git
-cd booking-api
+git clone https://github.com/Recollectionss/softpro-test-case.git
+cd softpro-test-case
 ```
 
 ### Set configuration variables
