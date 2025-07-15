@@ -5,10 +5,11 @@ import { jwtService, JwtService } from './jwt/jwt.service';
 import { JwtTokens } from '../../shared/dto/jwt-tokens.dto';
 import { Request, Response } from 'express';
 import { Config } from '../../config/config';
-import { HttpError } from '../../shared/error/http-error';
+import { HttpError } from '../../error/http-error';
 import { HttpCode } from '../../shared/enum/http-code.enum';
 import { UserJwtDataDto } from '../../shared/dto/user-jwt-data.dto';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import { SignUpDto } from './dto/sign-up.dto';
 
 export class AuthService {
   constructor(
@@ -17,8 +18,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signUp(req: Request<object, object, SignInDto>, res: Response) {
-    const data: SignInDto = req.body;
+  async signUp(req: Request<object, object, SignUpDto>, res: Response) {
+    const data: SignUpDto = req.body;
     await this.userService.validateUser(data.email);
 
     data.password = await this.bcryptService.setHash(data.password);

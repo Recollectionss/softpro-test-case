@@ -4,7 +4,7 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 import { UserJwtDataDto } from '../../shared/dto/user-jwt-data.dto';
 import { HttpCode } from '../../shared/enum/http-code.enum';
 import { servicesService, ServicesService } from '../services/services.service';
-import { HttpError } from '../../shared/error/http-error';
+import { HttpError } from '../../error/http-error';
 import { Op } from 'sequelize';
 import { Services } from '../services/services.entity';
 import {

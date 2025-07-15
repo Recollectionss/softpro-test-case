@@ -5,5 +5,5 @@ import { UserType } from '../../../shared/enum/user-type.enum';
 export class SignUpDto extends SignInDto {
   @IsNotEmpty()
   @IsEnum(UserType)
-  userType: string;
+  userType: UserType;
 }

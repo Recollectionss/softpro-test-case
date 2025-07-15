@@ -2,8 +2,8 @@ import { servicesService, ServicesService } from './services.service';
 import { Controller } from '../../core/controller.abstract';
 import { Request, Response } from 'express';
 import { CreateServiceDto } from './dto/create-service.dto';
-import { authMiddleware } from '../../middlewares/role.middleware';
 import { UserType } from '../../shared/enum/user-type.enum';
+import { authMiddleware } from '../../middlewares/auth.middleware';
 
 export class ServicesController extends Controller {
   constructor(private readonly servicesService: ServicesService) {

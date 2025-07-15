@@ -1,4 +1,4 @@
-import { HttpCode } from '../enum/http-code.enum';
+import { HttpCode } from '../shared/enum/http-code.enum';
 
 export class HttpError extends Error {
   public readonly statusCode: HttpCode;

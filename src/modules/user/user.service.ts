@@ -1,6 +1,6 @@
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { HttpError } from '../../shared/error/http-error';
+import { HttpError } from '../../error/http-error';
 import { HttpCode } from '../../shared/enum/http-code.enum';
 
 export class UserService {
@@ -8,7 +8,8 @@ export class UserService {
 
   async createOne(data: CreateUserDto): Promise<User> {
     await this.validateUser(data.email);
-    return (await this.userRepository.create(data)).dataValues;
+    return (await this.userRepository.create({ ...data, type: data.userType }))
+      .dataValues;
   }
 
   async validateUser(email: string) {

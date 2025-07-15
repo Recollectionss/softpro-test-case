@@ -28,6 +28,7 @@ export function authMiddleware(allowedRoles: UserType[] = []) {
       (req as any).user = payload;
 
       next();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return res
         .status(HttpCode.UNAUTHORIZED)
