@@ -61,8 +61,9 @@ $ cp example.env .env
 
 
 Start docker
+> PostgreSQL and Redis will be automatically started.
 ```bash
-$ docker compose up
+$ docker compose -f ./docker/docker-compose.yml up
 ```
 
 
@@ -80,22 +81,7 @@ http://localhost:5010/api/docs/
   - password: provider
 
 ---
-### 1. Clone the project
 
-
-> PostgreSQL and Redis will be automatically started.
-
----
-
-## 📘 Swagger API Docs
-
-Docs are available at:
-
-```
-http://localhost:3000/api/docs
-```
-
----
 
 ## 💡 Example API Requests
 
